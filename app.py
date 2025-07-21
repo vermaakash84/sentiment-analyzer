@@ -2,6 +2,7 @@ import streamlit as st
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
 import shap
 import torch
+import matplotlib.pyplot as plt
 
 @st.cache_resource
 def load_pipeline():
@@ -27,6 +28,9 @@ if st.button("Predict"):
     st.subheader("🔍 SHAP Explainability")
     explainer = shap.Explainer(pipe)
     shap_values = explainer([user_input])
-    st.set_option('deprecation.showPyplotGlobalUse', False)
     shap.plots.text(shap_values[0], display=False)
     st.pyplot(bbox_inches='tight')
+
+fig = plt.figure()
+shap.plots.text(shap_values[0])
+st.pyplot(fig)
