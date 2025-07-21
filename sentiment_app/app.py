@@ -26,11 +26,11 @@ if st.button("Predict"):
 
     st.markdown("---")
     st.subheader("🔍 SHAP Explainability")
+    
+    # SHAP explainability (text plot uses JS backend, not matplotlib)
     explainer = shap.Explainer(pipe)
     shap_values = explainer([user_input])
-    shap.plots.text(shap_values[0], display=False)
-    st.pyplot(bbox_inches='tight')
-
-fig = plt.figure()
-shap.plots.text(shap_values[0])
-st.pyplot(fig)
+    
+    # SHAP text plot doesn't work directly with st.pyplot()
+    # Instead, use st.components.v1.html for proper display
+    st.components.v1.html(shap.plots.text(shap_values[0], display=False), height=300)
