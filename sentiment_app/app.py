@@ -27,6 +27,5 @@ if st.button("Predict"):
     st.subheader("🔍 SHAP Explainability")
     explainer = shap.Explainer(pipe)
     shap_values = explainer([user_input])
-    st.set_option('deprecation.showPyplotGlobalUse', False)
     shap.plots.text(shap_values[0], display=False)
     st.pyplot(bbox_inches='tight')
