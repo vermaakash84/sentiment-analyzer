@@ -5,8 +5,8 @@ import torch
 
 @st.cache_resource
 def load_pipeline():
-    model = AutoModelForSequenceClassification.from_pretrained("model")
-    tokenizer = AutoTokenizer.from_pretrained("model")
+    model = AutoModelForSequenceClassification.from_pretrained("sentiment_app/model")
+    tokenizer = AutoTokenizer.from_pretrained("sentiment_app/model")
     pipe = pipeline("text-classification", model=model, tokenizer=tokenizer, return_all_scores=True)
     return pipe, tokenizer, model
 
